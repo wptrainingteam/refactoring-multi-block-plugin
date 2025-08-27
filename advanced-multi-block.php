@@ -47,3 +47,35 @@ function register_blocks() {
    }
 }
 add_action( 'init', 'register_blocks' );
+
+/**
+* Enqueues the block assets for the editor
+*/
+function enqueue_block_assets() {
+  $asset_file = include plugin_dir_path( __FILE__ ) . 'build/editor-script.asset.php';
+
+  wp_enqueue_script(
+      'editor-script-js',
+      plugin_dir_url( __FILE__ ) . 'build/editor-script.js',
+      $asset_file['dependencies'],
+      $asset_file['version'],
+      false
+  );
+}
+add_action( 'enqueue_block_editor_assets', 'enqueue_block_assets' );
+
+/**
+* Enqueues the block assets for the frontend
+*/
+function enqueue_frontend_assets() {
+  $asset_file = include plugin_dir_path( __FILE__ ) . 'build/frontend-script.asset.php';
+
+  wp_enqueue_script(
+      'frontend-script-js',
+      plugin_dir_url( __FILE__ ) . 'build/frontend-script.js',
+      $asset_file['dependencies'],
+      $asset_file['version'],
+      true
+  );
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_frontend_assets' );
