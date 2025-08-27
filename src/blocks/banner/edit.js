@@ -32,10 +32,7 @@ import './editor.scss';
 export default function Edit() {
 	return (
 		<p { ...useBlockProps() }>
-			{ __(
-				'Advanced Multi Block – hello from the editor!',
-				'advanced-multi-block'
-			) }
+			{ __( 'Banner – hello from the editor!', 'advanced-multi-block' ) }
 		</p>
 	);
 }
